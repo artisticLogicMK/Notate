@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+@import "lib/line-awesome.min.css";
+@import "lib/animate.min.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    font-family: 'Open Sans', sans-serif;
+}
+
+*{
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    scroll-behavior: smooth;
+    transition: all 0.25s;
+}
+ 
+*::-webkit-scrollbar{@apply w-[6px] bg-transparent}
+*::-webkit-scrollbar-thumb{@apply rounded-[10px] bg-black/[.12] dark:bg-black/[.4]}
+*::-webkit-scrollbar-thumb:hover{@apply bg-black/[.2] dark:bg-black/[.6]}
+
+input:focus {
+    outline: 0 none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+  @apply shadow-[0_0_0px_1000px_white_inset] dark:shadow-[0_0_0px_1000px_#262626_inset]
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #888;
+}

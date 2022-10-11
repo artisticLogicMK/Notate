@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="UpNote is an effective and intuitive cloud-based note-taking tool with a great user experience for writing down ideas, taking quick notes or keeping a journal at any time, synced across multiple devices." />
+	  <meta property="og:image" content="https://upnote.netlify.app/social.png" />
+    <meta name="theme-color" content="#ffffff">
+    <link rel="icon" href="/icon.png" />
+    <title>UpNote</title>
+    <script type="text/javascript">
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark')
+          document.querySelector('meta[name=theme-color]').setAttribute("content", "#262626")
+      } else {
+        document.documentElement.classList.remove('dark')
+        document.querySelector('meta[name=theme-color]').setAttribute("content", "#ffffff")
+      }
+    </script>
+  </head>
+  <body class="table mx-auto w-full bg-white dark:bg-neutral-800 select-none">
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
