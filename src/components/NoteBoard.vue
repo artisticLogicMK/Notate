@@ -186,7 +186,7 @@ onMounted(() => {
     )
 
     //show tinyMce editor
-    setTimeout(() => editorDisplayState.value = true, 200)
+    setTimeout(() => editorDisplayState.value = true, 600)
 })
 </script>
 
@@ -288,10 +288,14 @@ onMounted(() => {
                 <TinyMCEEditor v-if="editorDisplayState" />
 
                 <div class="absolute top-0 w-full h-full z-10 bg-white/70 dark:bg-neutral-800/60" v-if="!workData.mode"></div>
+
+                <div class="absolute top-0 w-full h-full z-10 flex items-center justify-center" v-if="!editorDisplayState">
+                    <i class="la la-spinner la-pulse text-5xl text-neutral-400/90"></i>
+                </div>
             </div>
 
             </div>
-
+ 
 
         </div>
     </div>
