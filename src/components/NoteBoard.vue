@@ -211,7 +211,7 @@ onMounted(() => {
                 </div>
 
 
-                <div class="noteInside grow px-3 overflow-y-auto">
+                <div class="noteInside grow px-1.5 xsm:px-3 overflow-y-auto">
                     <div class="flex items-center justify-between pt-3 px-3 xsm:px-5">
                         <div class="text-neutral-700 dark:text-neutral-300/90 text-base italic">Your notes...</div>
                         <button class="btns" v-wave @click="noteAction('add', null)"><i class="la la-plus"></i> New</button>
