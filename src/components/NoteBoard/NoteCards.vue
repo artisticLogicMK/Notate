@@ -12,12 +12,12 @@ const ballpinColor = (index) => {
 
 <template>
     <div class="cards group cursor-pointer">
-        <img src="../assets/img/square.png" class="hidden xsm:block w-full">
+        <img src="../../assets/img/square.png" class="hidden xsm:block w-full">
         <div class="absolute1 xsm:group-hover:-rotate-[3deg]"></div>
 
         <div class="absolute2 xsm:group-hover:rotate-[3deg]">
             <div class="ballpin" :style="ballpinColor(data.index)">
-                <img src="../assets/img/ball.png">
+                <img src="../../assets/img/ball.png">
             </div>
             
             <div class="title">

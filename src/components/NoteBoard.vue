@@ -1,5 +1,5 @@
 <script setup>
-import NoteCards from '../components/NoteCards.vue'
+import NoteCards from './NoteBoard/NoteCards.vue'
 import DeletePrompt from '../components/NoteBoard/DeletePrompt.vue'
 import SignoutPrompt from '../components/NoteBoard/SignoutPrompt.vue'
 import ThemeSwitch from '../components/NoteBoard/ThemeSwitch.vue'
@@ -164,6 +164,16 @@ const loadMore = async () => {
 }
 
 
+//emitted from themeSwitch: refresh tinyMCE component for change in theme
+const editorDisplayState = ref(false)
+const refreshEditor = () => {
+    editorDisplayState.value = false
+    setTimeout(() => editorDisplayState.value = true, 200)
+}
+
+const expandEditor = ref(false) //toggle fullscreen on editor
+
+
 //when entire NoteBoard component mounts
 onMounted(() => {
     //watch for change in firebase notes collection and repopulate data
@@ -174,16 +184,10 @@ onMounted(() => {
             notes.value = snapshot.docs.length ? currentNotes.map((doc) => ({id: doc.id, ...doc.data() })) : (window.navigator.onLine ? false : null)
         }
     )
-})
 
-//emitted from themeSwitch: refresh tinyMCE component for change in theme
-const editorDisplayState = ref(true)
-const refreshEditor = () => {
-    editorDisplayState.value = false
+    //show tinyMce editor
     setTimeout(() => editorDisplayState.value = true, 200)
-}
-
-const expandEditor = ref(false) //toggle fullscreen on editor
+})
 </script>
 
 
@@ -250,7 +254,7 @@ const expandEditor = ref(false) //toggle fullscreen on editor
 
 
             <div
-                class="flex flex-col absolute top-0 h-full lg:h-auto lg:relative max-w-[400px] min-w-full lg:min-w-[400px] xl:min-w-[500px] xl:max-w-[500px] bg-white dark:bg-neutral-800 lg:border-l border-l-neutral-200 dark:border-none duration-500 overflow-hidden"
+                class="flex flex-col absolute top-0 h-full lg:h-auto lg:relative max-w-full lg:max-w-[400px] min-w-full lg:min-w-[400px] xl:min-w-[500px] xl:max-w-[500px] bg-white dark:bg-neutral-800 lg:border-l border-l-neutral-200 dark:border-none duration-500 overflow-hidden"
                 :class="{'translate-x-0': workData.mode, 'translate-x-full lg:translate-x-0': !workData.mode, 'xl:min-w-full lg:min-w-full':expandEditor}"
             >
                 <div

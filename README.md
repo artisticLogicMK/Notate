@@ -46,6 +46,19 @@ npm run dev
 npm run build
 ```
 
+### Firebase config
+Create a firebase web app from firebase console and paste the app config in source folder (src/firebase.js).
+```javascript
+import { initializeApp } from 'firebase/app'
+
+const firebaseConfig = {
+    //...your firebase config
+}
+
+const initFirebase = initializeApp(firebaseConfig)
+export default initFirebase
+```
+
 ## Customize configuration
 
 See [Vite Configuration Reference](https://vitejs.dev/config/).

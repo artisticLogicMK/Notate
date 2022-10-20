@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app'
 
 const firebaseConfig = {
-    //firebase configuration goes here
+    //...your firebase config
 }
 
 const initFirebase = initializeApp(firebaseConfig)

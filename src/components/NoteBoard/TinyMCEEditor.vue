@@ -17,7 +17,7 @@ const theme = localStorage.theme == 'dark' || window.matchMedia('(prefers-color-
             :init="{
                 menubar: false,
                 statusbar: false,
-                icons: 'small',
+                //icons: 'small',
                 plugins: [
                     'lists link image charmap emoticons',
                     'table paste'
