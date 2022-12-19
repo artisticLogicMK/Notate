@@ -1,29 +1,27 @@
 <script setup>
 import AppIntro from './components/AppIntro.vue'
-import AuthModal from './components/AuthModal.vue'
 import NoteBoard from './components/NoteBoard.vue'
 import Loader from './components/Loader.vue'
 
+import { useRouter } from 'vue-router'
 import initFirebase  from './firebase'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { useStore } from './stores/global'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import AOS from 'aos'
 
-//initialize pinia store
-const store = useStore()
+const router = useRouter()
 
-//initialize firebase app
-initFirebase
+const store = useStore() //initialize pinia store
 
-//init firebase services
-const auth = getAuth()
+initFirebase //initialize firebase app
 
-//set display states
-const showAppIntro = ref(false)
-const showNoteBoard = ref(false)
+const auth = getAuth() //init firebase auth
+
+const loading = ref(true)
 
 onMounted(() => {
+  //init AOS anims
   AOS.init({
     duration: 600
   })
@@ -34,33 +32,40 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
 
     //user is signed in
-    store.setUser(user.uid) //user is signed in, store uid in state
-    showNoteBoard.value = true //display NoteBoard
-    store.displayAuthModal(false) //hide sign in modal
+    store.setUser(user.uid) //store uid in state
+    loading.value = false //hide loader
+    store.displayAuthModal(false) //hide auhth modal
+
+    router.push({path: '/noteboard/'+user.uid}) //go to noteboard
 
   } else {
 
     //user is signed out
-    store.setUser(null) //user is signed out, nullify user
-    showAppIntro.value = true //display AppIntro
-    store.displayAuthModal(false) //hide sign in modal
+    store.setUser(null) //nullify user state
+    loading.value = false //hide loader
+    store.displayAuthModal(false) //hide auhth modal
+    
+    router.push('/') //go to home
 
   }
 })
 </script>
 
 <template>
-  <div class="fixed top-0 left-0 z-10 w-screen h-screen flex items-center justify-center" v-if="!showNoteBoard && !showAppIntro">
+  <div
+    class="fixed top-0 left-0 z-10 w-screen h-screen flex items-center justify-center"
+    v-if="loading"
+  >
     <Loader class="w-16 animate-spin" />
   </div>
 
-  <AppIntro v-if="showAppIntro && !store.userId" />
+  <RouterView v-if="!loading"  />
+  
 
-  <NoteBoard v-if="showNoteBoard && store.userId" />
-
-  <AuthModal />
-
-  <div class="absolute bottom-0 z-10 w-full text-white text-sm bg-red-500/[.85] py-1 px-2 text-center" v-if="store.internetOff">
+  <div
+    v-if="store.internetOff"
+    class="absolute bottom-0 z-10 w-full text-white text-sm bg-red-500/[.85] py-1 px-2 text-center"
+  >
     Check Your Internet Connection!
   </div>
 </template>

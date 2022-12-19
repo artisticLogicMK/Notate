@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 
 export const useStore = defineStore('global', () => {
   //states
-  const userId = ref(0)
+  const userId = ref(null)
   const authModal = ref(false)
   const internetOff = ref(false)
 

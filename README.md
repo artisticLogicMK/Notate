@@ -1,12 +1,12 @@
-<p align="center"><img src="public/social.png"></p>
-
 <h1 align="center">UpNote</h1>
+
+<p align="center"><img src="public/social.png"></p>
 
 <h3 align="center">
 UpNote is an effective and intuitive cloud-based note-taking tool with a great user experience for writing down ideas, taking quick notes or keeping a journal at any time, synced across multiple devices.
 </h3>
 
-<h3 align="center">
+<h4 align="center">
 <br>
 Made with
 
@@ -16,7 +16,7 @@ Made with
 <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/tailwind%20css-%2338B2AC.svg?&style=for-the-badge&logo=tailwind%20css&logoColor=white" /></a>
 <a href="https://tiny.cloud"><img src="https://img.shields.io/badge/TinyMCE-%230696D7.svg?&style=for-the-badge&logo=a&logoColor=white" /></a>
 <br/>
-</h3>
+</h4>
 <br>
 
 <h3>

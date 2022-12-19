@@ -10,9 +10,11 @@ const ballpinColor = (index) => {
 }
 </script>
 
+
 <template>
     <div class="cards group cursor-pointer">
-        <img src="../../assets/img/square.png" class="hidden xsm:block w-full">
+        <!--<img src="../../assets/img/square.png" class="hidden xsm:block w-full">-->
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="hidden xsm:block w-full" viewBox="0 0 10 8"></svg>
         <div class="absolute1 xsm:group-hover:-rotate-[3deg]"></div>
 
         <div class="absolute2 xsm:group-hover:rotate-[3deg]">
@@ -31,6 +33,7 @@ const ballpinColor = (index) => {
         </div>
     </div>
 </template>
+
 
 <style>
 .noteContainer {
@@ -56,7 +59,7 @@ const ballpinColor = (index) => {
 }
 .noteContainer .cards .absolute2 .title { @apply grow flex items-center justify-center text-center }
 .noteContainer .cards .absolute2 .title p {
-    @apply text-sm text-neutral-700 dark:text-neutral-300/90 font-semibold py-2
+    @apply text-sm text-neutral-700 dark:text-neutral-300/90 font-semibold py-3 xsm:py-2
 }
 .noteContainer .activeNote .absolute2, .noteContainer .activeNote .absolute1 {
     @apply border-neutral-400 dark:border-neutral-400/80

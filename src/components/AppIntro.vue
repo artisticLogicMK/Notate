@@ -1,9 +1,17 @@
 <script setup>
+import AuthModal from './AuthModal.vue'
 import ThemeSwitch from '../components/NoteBoard/ThemeSwitch.vue'
+
+import { useRouter } from 'vue-router'
 import { useStore } from '../stores/global'
+import { onBeforeMount } from '@vue/runtime-core'
 
 //initialize pinia store
 const store = useStore()
+
+onBeforeMount(() => {
+    if (store.userId) useRouter().push({path: '/noteboard/'+store.userId})
+})
 </script>
 
 <template>
@@ -30,8 +38,10 @@ const store = useStore()
 
     <div class="absolute bottom-0 z-10 w-full text-center text-[0.82rem] text-neutral-900 dark:text-neutral-300 py-1">
         <a href="https://artisticlogicmk.one" target="_blank" class="mr-2.5 hover:underline"><i class="la la-globe"></i> artisticlogicmk.one</a>
-        <a href="https://github.com/artisticLogicMK/upnote" target="_blank" class="hover:underline"><i class="la la-github"></i> See the code</a>
+        <a href="https://github.com/artisticLogicMK/upnote" target="_blank" class="hover:underline"><i class="la la-github"></i> Source code</a>
     </div>
+
+    <AuthModal />
     
 </template>
 

@@ -5,7 +5,7 @@ import initFirebase  from '../firebase'
 import {
     getAuth,
     GoogleAuthProvider,
-    FacebookAuthProvider,
+    TwitterAuthProvider,
     signInWithPopup,
     signInWithRedirect,
     createUserWithEmailAndPassword,
@@ -26,8 +26,13 @@ const auth = getAuth()
 
 //chooses to continue with google authentication
 const openGoogle = () => {
-    //open google auth window
-    const provider = new GoogleAuthProvider()
+    const provider = new GoogleAuthProvider() //open auth window
+    signInWithPopup(auth, provider)
+}
+
+//chooses to continue with twitter authentication
+const openTwitter = () => {
+    const provider = new TwitterAuthProvider() //open auth window
     signInWithPopup(auth, provider)
 }
 
@@ -46,26 +51,26 @@ const signform = ref({
 
 
 const handleUser = () => {
-    //for when form action is still in process
-    signform.value.processing = true
+  //for when form action is still in process
+  signform.value.processing = true
 
-    if (signMode.value == 'create') {
-        createUserWithEmailAndPassword(auth, signform.value.email, signform.value.password)
-        .then(() => signform.value.processing = false )
-        .catch((err) => {
-            signform.value.error = err.message.replace('Firebase: ', '')
-            signform.value.processing = false
-        })
-    }
+  if (signMode.value == 'create') {
+      createUserWithEmailAndPassword(auth, signform.value.email, signform.value.password)
+      .then(() => signform.value.processing = false )
+      .catch((err) => {
+          signform.value.error = err.message.replace('Firebase: ', '')
+          signform.value.processing = false
+      })
+  }
 
-    if (signMode.value == 'login') {
-        signInWithEmailAndPassword(auth, signform.value.email, signform.value.password)
-        .then(() => signform.value.processing = false )
-        .catch((err) => {
-            signform.value.error = err.message.replace('Firebase: ', '')
-            signform.value.processing = false
-        })
-    }
+  if (signMode.value == 'login') {
+      signInWithEmailAndPassword(auth, signform.value.email, signform.value.password)
+      .then(() => signform.value.processing = false )
+      .catch((err) => {
+          signform.value.error = err.message.replace('Firebase: ', '')
+          signform.value.processing = false
+      })
+  }
 }
 </script>
 
@@ -85,16 +90,19 @@ const handleUser = () => {
           <button class="modalBtns text-neutral-700" :class="{'active': signMode == 'create'}" @click="signMode = 'create'">Sign Up</button>
         </div>
 
-        <div>
-          <button class="oAuths" v-wave @click="openGoogle">
+
+        <div class="flex">
+          <button class="oAuths mr-2" v-wave @click="openGoogle">
             <img src="../assets/img/icons/google.svg">
-            Continue with Google
+            With Google
           </button>
-          <button class="oAuths hidden" v-wave @click="openFacebook">
-            <i class="la la-facebook-square text-[#4267b2] text-3xl leading-[0]"></i>
-            Continue with Facebook
+
+          <button class="oAuths" v-wave @click="openTwitter">
+            <img src="../assets/img/icons/twitter.svg">
+            With Twitter
           </button>
         </div>
+
 
         <div class="text-neutral-400 dark:text-neutral-500 font-bold my-3 text-center">or</div>
 
@@ -133,10 +141,10 @@ const handleUser = () => {
 .dialogue .modalBtns { @apply rounded-md font-semibold text-sm px-3 py-1.5 dark:text-neutral-300 }
 .dialogue .modalBtns.active{ @apply bg-neutral-700 text-white dark:text-neutral-300 }
 
-.oAuths { @apply flex items-center justify-center mb-1.5 border-2 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 rounded-md py-1.5 w-full text-sm }
+.oAuths { @apply flex items-center justify-center mb-1.5 border dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 rounded-md py-1.5 w-full text-sm }
 .oAuths img { @apply w-5 inline-block mr-3 }
 
 #signform div { @apply mb-5 last:mb-0 }
 #signform label { @apply block text-xs text-neutral-700 dark:text-neutral-300 font-bold }
-#signform input { @apply border-b-2 text-sm bg-transparent text-neutral-600 dark:text-neutral-300 w-full py-1.5 dark:border-neutral-700 focus:border-neutral-600 dark:focus:border-neutral-300/90 }
+#signform input { @apply border-b border-neutral-300 text-sm bg-transparent text-neutral-600 dark:text-neutral-300 w-full py-1.5 dark:border-neutral-700 focus:border-neutral-600 dark:focus:border-neutral-300/90 }
 </style>

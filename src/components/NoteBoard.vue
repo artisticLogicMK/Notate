@@ -5,7 +5,8 @@ import SignoutPrompt from '../components/NoteBoard/SignoutPrompt.vue'
 import ThemeSwitch from '../components/NoteBoard/ThemeSwitch.vue'
 import TinyMCEEditor from '../components/NoteBoard/TinyMCEEditor.vue'
 
-import { nextTick, onMounted, ref } from 'vue'
+import { nextTick, onMounted, onBeforeMount, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { useStore } from '../stores/global'
 import { useNoteStore } from '../stores/noteboard'
 import moment from 'moment'
@@ -13,14 +14,15 @@ import initFirebase  from '../firebase'
 import { getAuth, signOut } from 'firebase/auth'
 import { getFirestore, collection, onSnapshot, addDoc, getDocs, doc, deleteDoc, query, where, orderBy, serverTimestamp, updateDoc, startAfter, limit } from 'firebase/firestore'
 
+//user id from url
+const userId = useRoute().params.id
+
 //initialize pinia stores
 const store = useStore()
 const noteStore = useNoteStore()
 
-
 //initialize firebase app
 initFirebase
-
 
 //init firebase services
 const auth = getAuth()
@@ -84,7 +86,7 @@ const saveNote = async () => {
             workData.value = { mode: null, noteId: null }
 
             await addDoc(allNotes, {
-                userId: store.userId,
+                userId: userId,
                 ...noteStore.noteEditor,
                 date: moment().format('Do MMM, YYYY'),
                 createdAt: serverTimestamp()
@@ -139,8 +141,9 @@ const deleteNote = (noteId) => {
 
 //firebase sign user out
 const signout = () => {
+    store.setUser(null) //nullify user state
     noteStore.signoutPrompt = false
-  signOut(auth)
+    signOut(auth)
 }
 
 
@@ -151,7 +154,7 @@ const loadMore = async () => {
 
     if (lastFetchedNote) {
         await getDocs(query(allNotes,
-            where('userId', '==', store.userId),
+            where('userId', '==', userId),
             orderBy('createdAt', 'desc'),
             startAfter(lastFetchedNote),
             limit(20))
@@ -171,13 +174,18 @@ const refreshEditor = () => {
     setTimeout(() => editorDisplayState.value = true, 200)
 }
 
-const expandEditor = ref(false) //toggle fullscreen on editor
+const expandEditor = ref(false) //state -> toggle fullscreen on editor
 
+
+onBeforeMount(() => {
+    if (!store.userId) useRouter().push({path: '/'})
+    if (store.userId && store.userId !== userId) useRouter().push({name: 'notFound'})
+})
 
 //when entire NoteBoard component mounts
 onMounted(() => {
     //watch for change in firebase notes collection and repopulate data
-    const qry = query(allNotes, where('userId', '==', store.userId), orderBy('createdAt', 'desc'), limit(20))
+    const qry = query(allNotes, where('userId', '==', userId), orderBy('createdAt', 'desc'), limit(20))
     onSnapshot(qry,
         (snapshot) => {
             currentNotes = snapshot.docs
@@ -192,12 +200,11 @@ onMounted(() => {
 
 
 <template>
-    <div class="h-screen w-screen bg-[url(../img/doodle.png)] dark:bg-[url(../img/doodle_dark.png)]">
+    <div class="h-full w-screen bg-[url(../img/doodle.png)] dark:bg-[url(../img/doodle_dark.png)]">
         <div class="table-cell lg:align-middle h-screen w-screen bg-gradient-to-b from-neutral-300 dark:from-neutral-900 to-transparent">
 
 
-            <div class="flex items-stretch bg-white dark:bg-neutral-800 shadow-lg dark:shadow-black/50 xsm:rounded-2xl xsm:my-3 w-full xsm:w-[95%] sm:w-[95%] max-w-7xl mx-auto h-full xsm:h-auto max-h-screen xsm:max-h-[95vh] md:max-h-[90vh] xsm:min-h-[80vh] my-auto xsm:border border-b-neutral-200 dark:border-neutral-900/70 overflow-hidden relative">
-
+            <div class="flex items-stretch bg-white dark:bg-neutral-800 shadow-lg dark:shadow-black/50 xsm:rounded-2xl xsm:my-3 w-full xsm:w-[95%] sm:w-[95%] max-w-7xl mx-auto h-full xsm:h-auto max-h-screen xsm:max-h-[95vh] md:max-h-[95vh] xsm:min-h-[80vh] my-auto xsm:border border-b-neutral-200 dark:border-neutral-900/70 overflow-hidden relative">
 
             <div class="grow flex flex-col w-8/12 bg-neutral-50/70 dark:bg-neutral-900/50" :class="{'hidden':expandEditor}">
                 <div class="relative flex justify-between items-center bg-white dark:bg-neutral-800 px-3 xsm:px-5 py-1.5 border border-transparent border-b-neutral-200 dark:border-b-neutral-900 lg:dark:border-r-neutral-900/80">
@@ -254,7 +261,7 @@ onMounted(() => {
 
 
             <div
-                class="flex flex-col absolute top-0 h-full lg:h-auto lg:relative max-w-full lg:max-w-[400px] min-w-full lg:min-w-[400px] xl:min-w-[500px] xl:max-w-[500px] bg-white dark:bg-neutral-800 lg:border-l border-l-neutral-200 dark:border-none duration-500 overflow-hidden"
+                class="flex flex-col absolute top-0 h-full lg:h-auto lg:relative max-w-full lg:max-w-[400px] min-w-full lg:min-w-[400px] xl:min-w-[500px] xl:max-w-[500px] bg-white dark:bg-neutral-800 lg:border-l border-l-neutral-200 dark:border-none duration-300 lg:duration-[0s] xl:duration-300 overflow-hidden"
                 :class="{'translate-x-0': workData.mode, 'translate-x-full lg:translate-x-0': !workData.mode, 'xl:min-w-full lg:min-w-full':expandEditor}"
             >
                 <div
