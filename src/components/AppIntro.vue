@@ -20,10 +20,10 @@ onBeforeMount(() => {
 
         <div class="md:flex items-center md:h-screen max-w-5xl mx-auto pt-10 md:pt-0 md:mt-0 px-3 md:px-5 bg-grad relative z-10" data-aos="fade">
             <div class="md:mr-4 w-full md:w-1/2" data-aos="fade-right">
-                <img src="../assets/img/logo.svg" class="dark:hidden">
-                <img src="../assets/img/logo_dark.svg" class="hidden dark:block">
+                <img src="../assets/img/logo.svg" class="w-[215px] mb-2 dark:hidden">
+                <img src="../assets/img/logo_dark.svg" class="w-[215px] mb-2 hidden dark:block">
                 
-                <p class="mb-3 text-base text-neutral-900 dark:text-neutral-300">UpNote is an effective and intuitive cloud-based note-taking tool with a great user experience for writing down ideas, taking quick notes or keeping a journal at any time, synced across multiple devices.</p>
+                <p class="mb-3 text-base text-neutral-900 dark:text-neutral-300">Notate is an effective and intuitive cloud-based note-taking tool with a great user experience for writing down ideas, taking quick notes or keeping a journal at any time, synced across multiple devices.</p>
                 
                 <div class="flex items-center">
                     <button class="rounded-full bg-neutral-300 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300/90 text-lg font-semibold px-5 py-2" v-wave @click="store.displayAuthModal(true)">Get Started</button>
@@ -38,7 +38,7 @@ onBeforeMount(() => {
 
     <div class="absolute bottom-0 z-10 w-full text-center text-[0.82rem] text-neutral-900 dark:text-neutral-300 py-1">
         <a href="https://artisticlogicmk.one" target="_blank" class="mr-2.5 hover:underline"><i class="la la-globe"></i> artisticlogicmk.one</a>
-        <a href="https://github.com/artisticLogicMK/upnote" target="_blank" class="hover:underline"><i class="la la-github"></i> Source code</a>
+        <a href="https://github.com/artisticLogicMK/notate" target="_blank" class="hover:underline"><i class="la la-github"></i> Source code</a>
     </div>
 
     <AuthModal />

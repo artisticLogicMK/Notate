@@ -12,12 +12,12 @@ const theme = localStorage.theme == 'dark' || window.matchMedia('(prefers-color-
         <editor
 
             class="h-full"
-            api-key="dg1dg1qvjqzxkj73yr8lnj35hm62eqk4mdhkor94w7h844mo"
+            api-key="q9i5915bgf2zeqvmqylxcm97ztznewvkfjt5nho9ax0ievr0"
             v-model="noteStore.noteEditor.data"
             :init="{
                 menubar: false,
                 statusbar: false,
-                //icons: 'small',
+                icons: 'small',
                 plugins: [
                     'lists link image charmap emoticons',
                     'table paste'

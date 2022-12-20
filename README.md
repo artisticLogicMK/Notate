@@ -1,9 +1,9 @@
-<h1 align="center">UpNote</h1>
+<h1 align="center">Notate</h1>
 
 <p align="center"><img src="public/social.png"></p>
 
 <h3 align="center">
-UpNote is an effective and intuitive cloud-based note-taking tool with a great user experience for writing down ideas, taking quick notes or keeping a journal at any time, synced across multiple devices.
+Notate is an effective and intuitive cloud-based note-taking tool with a great user experience for writing down ideas, taking quick notes or keeping a journal at any time, synced across multiple devices.
 </h3>
 
 <h4 align="center">
@@ -22,7 +22,7 @@ Made with
 <h3>
 <strong>Links</strong>
 
-<a href="https://upnote.netlify.app" target="_blank">View the app in action.</a>
+<a href="https://notate.netlify.app" target="_blank">View the app in action.</a>
 
 <a href="https://www.behance.net/gallery/154544225/UpNote-Note-taking-application" target="_blank">Check out more screenshots on behance.</a>
 </h3>

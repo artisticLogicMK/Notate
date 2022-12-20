@@ -79,7 +79,7 @@ const setTheme = (mode) => {
     ></i>
 
     <i
-        class="la la-moon themeIcos"
+        class="la la-cloud-moon themeIcos"
         v-else
         @click="!isChanging ? setTheme('dark') : ''"
         data-aos="fade-down" data-aos-offset="0"

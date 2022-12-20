@@ -14,6 +14,7 @@ dist-ssr
 coverage
 *.local
 /removed
+/public/google857db8c9109e2b2e.html
 package-lock.json
 
 /cypress/videos/
