@@ -24,7 +24,7 @@ Made with
 
 <a href="https://notate.netlify.app" target="_blank">View the app in action.</a>
 
-<a href="https://www.behance.net/gallery/154544225/UpNote-Note-taking-application" target="_blank">Check out more screenshots on behance.</a>
+<a href="https://www.behance.net/gallery/154544225/Notate-Note-taking-application" target="_blank">Check out more screenshots on behance.</a>
 </h3>
 <br>
 
