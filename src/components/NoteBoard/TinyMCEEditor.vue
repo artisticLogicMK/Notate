@@ -12,7 +12,7 @@ const theme = localStorage.theme == 'dark' || window.matchMedia('(prefers-color-
         <editor
 
             class="h-full"
-            api-key="q9i5915bgf2zeqvmqylxcm97ztznewvkfjt5nho9ax0ievr0"
+            api-key="lk9vywxr6latveb3bbeqdekrkpri6ezhtwg8np4lravjvola"
             v-model="noteStore.noteEditor.data"
             :init="{
                 menubar: false,
